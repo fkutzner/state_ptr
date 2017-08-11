@@ -15,7 +15,8 @@ environment:
     INSTALLATION_DIR: C:\projects\installation
 
 configuration:
-  - Release
+  # The CMake setup does not afford testing in Release mode yet
+  # - Release
   - Debug
 
 build_script:
