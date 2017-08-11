@@ -5,6 +5,7 @@ compiler:
 
 os:
   - linux
+  - osx
 
 dist: trusty
 sudo: required
@@ -14,7 +15,13 @@ env:
     # The CMake setup does not afford testing in Release mode yet
     # - BUILDTYPE=Release
     - BUILDTYPE=Debug
+    exclude:
+      # gcc is just an alias for clang on OS X, so remove the rsp. build for now
+      - os: osx
+        compiler: gcc
 
+# Note: For clang builds, a gcc-6 environment is set up as well so that a
+# C++14-compliant libstdc++ can be used.
 before_script:
   - if [ `uname` = "Linux" ]; then
       wget -nv -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add - ;
