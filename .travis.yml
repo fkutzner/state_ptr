@@ -37,5 +37,5 @@ script:
   - mkdir -p ../build
   - cd ../build
   - cmake -DCMAKE_BUILD_TYPE=${BUILDTYPE} ../state_ptr
-  - cmake --build . --config Release
-  - ctest -V -C Release
+  - cmake --build . -- -j2
+  - ctest -V
