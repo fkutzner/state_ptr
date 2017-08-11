@@ -11,7 +11,8 @@ sudo: required
 
 env:
   matrix:
-    - BUILDTYPE=Release
+    # The CMake setup does not afford testing in Release mode yet
+    # - BUILDTYPE=Release
     - BUILDTYPE=Debug
 
 before_script:
