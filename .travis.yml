@@ -14,27 +14,24 @@ env:
     - BUILDTYPE=Release
     - BUILDTYPE=Debug
 
+  addons:
+    apt:
+      sources:
+        - ubuntu-toolchain-r-test
+        - llvm-toolchain-precise-3.7
+      packages:
+        - g++-6
+        - clang-3.7
+
 matrix:
-    # from https://docs.travis-ci.com/user/languages/cpp/
-    -include:
-      - os: linux
-        addons:
-          apt:
-            sources:
-              - ubuntu-toolchain-r-test
-            packages:
-              - g++-6
-        env:
-          - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
-      - os: linux
-        addons:
-          apt:
-            sources:
-              - llvm-toolchain-precise-3.7
-            packages:
-              - clang-3.7
-        env:
-          - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7"
+    - os: linux
+      compiler: gcc
+      env:
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+    - os: linux
+      compiler: clang
+      env:
+        - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7"
 
 script:
   - eval "${MATRIX_EVAL}"
