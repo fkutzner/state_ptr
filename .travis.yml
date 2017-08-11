@@ -1,0 +1,28 @@
+language: cpp
+compiler:
+  - gcc
+  - clang
+
+os:
+  - linux
+  - osx
+
+dist: trusty
+sudo: required
+
+env:
+  matrix:
+    - BUILDTYPE=Release
+    - BUILDTYPE=Debug
+
+matrix:
+  exclude:
+    - os: osx
+      compiler: gcc
+
+script:
+  - mkdir -p ../build
+  - cd ../build
+  - cmake -DCMAKE_BUILD_TYPE=${BUILDTYPE} ../state_ptr
+  - cmake --build . --config Release
+  - ctest -V -C Release
